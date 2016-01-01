@@ -1,0 +1,8 @@
+/googlemock
+/gtest
+
+/build
+/conanfile.pyc
+/conaninfo.txt
+/conanbuildinfo.txt
+/conanbuildinfo.cmake
