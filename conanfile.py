@@ -5,7 +5,7 @@ class GoogleMockConan(ConanFile):
     version = '1.7.0'
     settings = ['os', 'compiler', 'build_type', 'arch']
     generators = ['cmake']
-    url = 'https://github.com/google/googlemock-conan.git'
+    url = 'https://github.com/azriel91/googlemock-conan.git'
     options = {
         'BUILD_SHARED_LIBS':       ['ON', 'OFF'], # Build shared libraries (DLLs).
         'gmock_build_tests':       ['ON', 'OFF'], # Build all of Google Mock's own tests.
