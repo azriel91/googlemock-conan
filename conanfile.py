@@ -1,4 +1,5 @@
 from conans import ConanFile
+import os
 
 
 class GoogleMockConan(ConanFile):
@@ -73,6 +74,9 @@ class GoogleMockConan(ConanFile):
             setattr(googletest_options, opt, getattr(self.options, opt))
 
     def build(self):
+        if not os.path.isdir("{conan_dir}{sep}{src_dir}".format(conan_dir=self.conanfile_directory, sep=os.sep, src_dir=self.name)):
+            self.source()
+
         option_defines = ' '.join("-D%s=%s" % (opt, val) for (opt, val) in self.options.iteritems() if val is not None)
         self.run("cmake {src_dir} -B{build_dir} {defines}".format(src_dir=self.name,
                                                                   build_dir=self.build_dir,
