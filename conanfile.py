@@ -78,6 +78,8 @@ class GoogleMockConan(ConanFile):
             self.source()
 
         option_defines = ' '.join("-D%s=%s" % (opt, val) for (opt, val) in self.options.iteritems() if val is not None)
+        option_defines += ' -DGTEST_CREATE_SHARED_LIBRARY=' + ('1' if self.options['BUILD_SHARED_LIBS'] == 'ON' else '0')
+
         self.run("cmake {src_dir} -B{build_dir} {defines}".format(src_dir=self.name,
                                                                   build_dir=self.build_dir,
                                                                   defines=option_defines))
@@ -95,6 +97,8 @@ class GoogleMockConan(ConanFile):
         self.copy('README', dst='.', src=self.name, keep_path=True)
 
         # Built artifacts
+        self.copy('*.lib', dst='lib', src=self.build_dir, keep_path=False)
+        self.copy('*.dll', dst='bin', src=self.build_dir, keep_path=False)
         if self.options['BUILD_SHARED_LIBS'] == 'ON':
             self.copy('libgmock.so', dst='lib', src=self.build_dir, keep_path=False)
             self.copy('libgmock_main.so', dst='lib', src=self.build_dir, keep_path=False)
@@ -120,3 +124,8 @@ class GoogleMockConan(ConanFile):
 
     def package_info(self):
         self.cpp_info.libs.append('gmock')
+        if self.options['BUILD_SHARED_LIBS'] == 'ON':
+            self.cpp_info.defines.append("GTEST_LINKED_AS_SHARED_LIBRARY=1")
+
+        if self.settings.os == 'Linux' or self.options['GTEST_HAS_PTHREAD'] == '1':
+            self.cpp_info.libs.append('pthread')
