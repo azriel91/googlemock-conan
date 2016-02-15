@@ -4,6 +4,7 @@ import os
 
 class GoogleMockConan(ConanFile):
     name = 'googlemock'
+    license = 'Copyright 2008, Google Inc.'  # See https://github.com/google/googlemock/blob/release-1.7.0/LICENSE
     version = '1.7.0'
     settings = ['os', 'compiler', 'build_type', 'arch']
     generators = ['cmake']
