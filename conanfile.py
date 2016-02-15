@@ -31,7 +31,7 @@ class GoogleMockConan(ConanFile):
     }
     default_options = ('BUILD_SHARED_LIBS=OFF',
                        'gmock_build_tests=OFF',
-                       'gtest_force_shared_crt=OFF',
+                       'gtest_force_shared_crt=ON',
                        'gtest_build_tests=OFF',
                        'gtest_build_samples=OFF',
                        'gtest_disable_pthreads=OFF',
@@ -57,7 +57,7 @@ class GoogleMockConan(ConanFile):
 
     def requirements(self):
         # We require googletest so that others requiring googlemock don't have to
-        self.requires("googletest/{gtest_version}@azriel91/stable-1".format(gtest_version=self.gtest_version))
+        self.requires("googletest/{gtest_version}@azriel91/stable-3".format(gtest_version=self.gtest_version))
 
     def config(self):
         # googlemock is compiled with googletest sources, so if linking to googletest, we must also link to a version
