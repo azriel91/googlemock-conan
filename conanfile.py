@@ -1,4 +1,5 @@
-from conans import *
+from conans import ConanFile
+
 
 class GoogleMockConan(ConanFile):
     name = 'googlemock'
@@ -7,25 +8,25 @@ class GoogleMockConan(ConanFile):
     generators = ['cmake']
     url = 'https://github.com/azriel91/googlemock-conan.git'
     options = {
-        'BUILD_SHARED_LIBS':       ['ON', 'OFF'], # Build shared libraries (DLLs).
-        'gmock_build_tests':       ['ON', 'OFF'], # Build all of Google Mock's own tests.
-        'gtest_force_shared_crt':  ['ON', 'OFF'], # Use shared (DLL) run-time lib even when Google Test is built as static lib.
-        'gtest_build_tests':       ['ON', 'OFF'], # Build all of gtest's own tests.
-        'gtest_build_samples':     ['ON', 'OFF'], # Build gtest's sample programs.
-        'gtest_disable_pthreads':  ['ON', 'OFF'], # Disable uses of pthreads in gtest.
+        'BUILD_SHARED_LIBS': ['ON', 'OFF'],       # Build shared libraries (DLLs).
+        'gmock_build_tests': ['ON', 'OFF'],       # Build all of Google Mock's own tests.
+        'gtest_force_shared_crt': ['ON', 'OFF'],  # Use shared (DLL) run-time lib even when Google Test is built as static lib.
+        'gtest_build_tests': ['ON', 'OFF'],       # Build all of gtest's own tests.
+        'gtest_build_samples': ['ON', 'OFF'],     # Build gtest's sample programs.
+        'gtest_disable_pthreads': ['ON', 'OFF'],  # Disable uses of pthreads in gtest.
 
         # Set this to 0 if your project already uses a tuple library, and GTest should use that library
         # Set this to 1 if GTest should use its own tuple library
         'GTEST_USE_OWN_TR1_TUPLE': [None, '0', '1'],
 
         # Set this to 0 if GTest should not use tuple at all. All tuple features will be disabled
-        'GTEST_HAS_TR1_TUPLE':     [None, '0'],
+        'GTEST_HAS_TR1_TUPLE': [None, '0'],
 
         # If GTest incorrectly detects whether or not the pthread library exists on your system, you can force it
         # by setting this option value to:
         #   1 - if pthread does actually exist
         #   0 - if pthread does not actually exist
-        'GTEST_HAS_PTHREAD':       [None, '0', '1']
+        'GTEST_HAS_PTHREAD': [None, '0', '1']
     }
     default_options = ('BUILD_SHARED_LIBS=OFF',
                        'gmock_build_tests=OFF',
